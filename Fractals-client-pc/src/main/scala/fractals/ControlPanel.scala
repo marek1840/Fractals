@@ -1,15 +1,15 @@
 package fractals
 
+import java.awt.BorderLayout
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
+
 import fractals.view.panels.ColorSelectionPanel
 import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JSeparator
 import javax.swing.SwingConstants
-import javax.swing.Box
-import java.awt.BorderLayout
 
 class ControlPanel(val drawingArea: DrawingArea) extends JPanel {
   val colorPanel = new ColorSelectionPanel
@@ -44,14 +44,14 @@ class ControlPanel(val drawingArea: DrawingArea) extends JPanel {
   redraw.addActionListener(new ActionListener {
     def actionPerformed(e: ActionEvent) = {
       drawingArea.backgroundColor = colorPanel.backgroundColor
-      drawingArea.redraw
+      drawingArea.draw
     }
   })
 
   download.addActionListener(new ActionListener {
     def actionPerformed(e: ActionEvent) = {
-      val fractal = reader.getFractal
-      drawingArea.draw(fractal)
+      drawingArea.fractal = reader.getFractal
+      redraw.doClick
     }
   })
 }

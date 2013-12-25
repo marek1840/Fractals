@@ -15,11 +15,7 @@ class DrawingArea extends JPanel {
 
   def setBackgroundColor(c: Color) = backgroundColor = c
 
-  def redraw = if (fractal != null) draw(fractal)
-
-  def draw(fractal: Fractal): Unit = {
-    this.fractal = fractal
-
+  def draw: Unit = {
     val image = getImage(FractalColoring.color(backgroundColor, fractal))
 
     pic.setIcon(new ImageIcon(image))
