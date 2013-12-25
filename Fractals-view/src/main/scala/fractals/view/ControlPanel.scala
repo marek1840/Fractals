@@ -4,9 +4,7 @@ import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
-
 import scala.collection.mutable.LinkedHashMap
-
 import fractals.FractalManager
 import fractals.messages.FractalType
 import fractals.view.controllers.buttons.ChangeController
@@ -20,6 +18,7 @@ import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JSeparator
 import javax.swing.SwingConstants
+import fractals.FractalSender
 
 class ControlPanel(
     val window: MainWindow,

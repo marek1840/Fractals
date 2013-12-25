@@ -1,7 +1,7 @@
 package fractals.view.logic.buttons
 
 import fractals.view.DrawingArea
-import fractals.view.FractalSender
+import fractals.FractalSender
 
 class SendLogic(
     val sender: FractalSender,

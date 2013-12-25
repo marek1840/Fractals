@@ -1,7 +1,7 @@
 package fractals.view.controllers.buttons
 
 import fractals.view.DrawingArea
-import fractals.view.FractalSender
+import fractals.FractalSender
 import fractals.view.controllers.ButtonController
 import fractals.view.logic.buttons.SendLogic
 

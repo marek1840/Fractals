@@ -1,21 +1,21 @@
-package fractals.view
+package fractals
 
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.image.BufferedImage
 
-import fractals.Fractal
-import fractals.FractalColoring
 import javax.swing.BoxLayout
 import javax.swing.ImageIcon
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class DrawingArea(val window: MainWindow) extends JPanel {
-  var fractal: Fractal = _
+class DrawingArea extends JPanel {
+  var fractal: Fractal = null
   var backgroundColor: Color = Color.RED
 
   def setBackgroundColor(c: Color) = backgroundColor = c
+
+  def redraw = if (fractal != null) draw(fractal)
 
   def draw(fractal: Fractal): Unit = {
     this.fractal = fractal
@@ -23,7 +23,6 @@ class DrawingArea(val window: MainWindow) extends JPanel {
     val image = getImage(FractalColoring.color(backgroundColor, fractal))
 
     pic.setIcon(new ImageIcon(image))
-    iterationLabel.setText(fractal.min + "/" + fractal.max)
   }
 
   def getImage(fractal: Array[Array[Color]]): BufferedImage = {
@@ -44,28 +43,11 @@ class DrawingArea(val window: MainWindow) extends JPanel {
   /* ********************************** */
 
   val pic: JLabel = new JLabel
-  val iterationLabel = new JLabel("???/???")
 
   setLayout(new BorderLayout)
 
   add(new JPanel {
     this.add(pic)
   }, BorderLayout.CENTER)
-
-  add(new JPanel {
-    this.add(new JPanel {
-      this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS))
-
-      this.add(new JPanel {
-        this.setLayout(new BorderLayout)
-        this.add(new JPanel, BorderLayout.CENTER)
-      })
-      this.add(new JLabel("Min/Max iterations"))
-      this.add(new JPanel)
-
-      this.add(iterationLabel)
-      this.add(new JPanel)
-    })
-  }, BorderLayout.PAGE_END)
 
 }

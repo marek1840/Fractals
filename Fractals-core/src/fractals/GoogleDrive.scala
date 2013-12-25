@@ -14,7 +14,8 @@ object GoogleDrive {
   val SERVICE_ACCOUNT_EMAIL = "930057263021-stave1gsmbkr0mu8uasts9au1q8feale@developer.gserviceaccount.com";
 
   /** Path to the Service Account's Private Key file */
-  val SERVICE_ACCOUNT_PKCS12_FILE_PATH = "src/main/resources/faa5ab20d802867c17c890b72a385b6f7cc1ba89-privatekey.p12";
+  val SERVICE_ACCOUNT_PKCS12_FILE_PATH =
+    "faa5ab20d802867c17c890b72a385b6f7cc1ba89-privatekey.p12"
 
   /**
    * Build and returns a Drive service object authorized with the service accounts.

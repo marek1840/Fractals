@@ -1,13 +1,10 @@
-package fractals.view
+package fractals
 
 import java.io.FileOutputStream
 import java.io.ObjectOutputStream
 
 import com.google.api.client.http.FileContent
 import com.google.api.services.drive.model.File
-
-import fractals.Fractal
-import fractals.GoogleDrive
 
 class FractalSender {
   val drive = GoogleDrive.getDriveService
