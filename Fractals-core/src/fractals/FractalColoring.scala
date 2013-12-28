@@ -1,33 +1,27 @@
 package fractals
 
 import java.awt.Color
-import scala.collection.mutable.Set
-import scala.collection.mutable.Map
 
 object FractalColoring {
 
-  def scale(color: Color, value: Double): Color =
-    new Color((color.getRed() * value).asInstanceOf[Int],
-      (color.getGreen() * value).asInstanceOf[Int],
-      (color.getBlue() * value).asInstanceOf[Int])
+  def scale(r: Int, g: Int, b: Int, value: Double): (Int, Int, Int) =
+    ((r * value).asInstanceOf[Int],
+      (g * value).asInstanceOf[Int],
+      (b * value).asInstanceOf[Int])
 
-  def mix(c1: Color, value: Double, c2: Color): Color = {
-    val C1 = scale(c1, value)
-    val C2 = scale(c2, 1 - value)
+  def mix(r1: Int, g1: Int, b1: Int, value: Double, r2: Int, g2: Int, b2: Int): (Int, Int, Int) = {
+    val (red1, green1, blue1) = scale(r1, g1, b1, value)
+    val (red2, green2, blue2) = scale(r2, g2, b2, 1 - value)
 
-    add(C1, C2)
+    add(red1, green1, blue1, red2, green2, blue2)
   }
 
-  def add(c1: Color, c2: Color): Color = {
-    val (r, g, b) = (c1.getRed() + c2.getRed(),
-      c1.getGreen() + c2.getGreen(),
-      c1.getBlue() + c2.getBlue())
-    new Color(r, g, b)
-  }
+  def add(r1: Int, g1: Int, b1: Int, r2: Int, g2: Int, b2: Int): (Int, Int, Int) =
+    (r1 + r2, g1 + g2, b1 + b2)
 
   /* ************************************** */
-  def color(background: Color, fractal: Fractal): Array[Array[Color]] = {
-    val image = Array.ofDim[Color](fractal.size._1, fractal.size._2)
+  def color(r: Int, g: Int, b: Int, fractal: Fractal): Array[Array[(Int, Int, Int)]] = {
+    val image = Array.ofDim[(Int, Int, Int)](fractal.size._1, fractal.size._2)
     val span = ((fractal.max - fractal.min) / 2) + 1.0
 
     println("min/max: ", fractal.min + "/" + fractal.max)
@@ -38,15 +32,15 @@ object FractalColoring {
       i = fractal.image(x)(y)
     } {
       if (i == fractal.setIteration) {
-        image(x)(y) = Color.BLACK
+        image(x)(y) = (Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue())
       } else if (i * 2 < (fractal.max + fractal.min)) {
         val step: Double = (i - fractal.min) / span
-        image(x)(y) = scale(background, step)
+        image(x)(y) = scale(r, g, b, step)
       } else {
         val tmp = (i - fractal.min) / span
         val step: Double = if (tmp <= 1) 0 else tmp - 1
         val rStep = 1 - step
-        image(x)(y) = mix(Color.WHITE, step, background)
+        image(x)(y) = mix(Color.WHITE.getRed(), Color.WHITE.getBlue(), Color.WHITE.getBlue(), step, r, g, b)
       }
     }
 

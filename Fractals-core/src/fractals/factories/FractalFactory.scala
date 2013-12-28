@@ -1,9 +1,7 @@
 package fractals.factories
 
-import java.awt.Color
-import fractals.Fractal
 import fractals.Complex
-import scala.annotation.tailrec
+import fractals.Fractal
 
 trait FractalFactory {
   def size: (Int, Int)

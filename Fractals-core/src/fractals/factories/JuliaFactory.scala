@@ -1,6 +1,5 @@
 package fractals.factories
 
-import java.awt.Color
 import fractals.Complex
 
 class JuliaFactory(

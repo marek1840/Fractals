@@ -1,7 +1,5 @@
 package fractals.factories
 
-import java.awt.Color
-import fractals.Fractal
 import fractals.Complex
 
 class MandelbrotFactory(

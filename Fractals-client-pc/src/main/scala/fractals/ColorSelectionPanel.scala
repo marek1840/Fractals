@@ -1,4 +1,4 @@
-package fractals.view.panels
+package fractals
 
 import java.awt.Color
 

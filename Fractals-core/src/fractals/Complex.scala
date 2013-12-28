@@ -1,7 +1,5 @@
 package fractals
 
-import scala.math.BigDecimal
-
 final class Complex(val re: Double, val im: Double) {
 
   def +(z: Complex) = Complex(re + z.re, im + z.im)

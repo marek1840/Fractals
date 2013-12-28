@@ -20,13 +20,14 @@ class DrawingArea(val window: MainWindow) extends JPanel {
   def draw(fractal: Fractal): Unit = {
     this.fractal = fractal
 
-    val image = getImage(FractalColoring.color(backgroundColor, fractal))
+    val (r, g, b) = (backgroundColor.getRed(), backgroundColor.getGreen(), backgroundColor.getBlue())
+    val image = getImage(FractalColoring.color(r, g, b, fractal))
 
     pic.setIcon(new ImageIcon(image))
     iterationLabel.setText(fractal.min + "/" + fractal.max)
   }
 
-  def getImage(fractal: Array[Array[Color]]): BufferedImage = {
+def getImage(fractal: Array[Array[(Int, Int, Int)]]): BufferedImage = {
     val width = fractal.length
     val height = fractal(0).length
     val image = new BufferedImage(fractal.length, fractal(0).length, BufferedImage.TYPE_INT_RGB)
@@ -34,7 +35,9 @@ class DrawingArea(val window: MainWindow) extends JPanel {
     for {
       x <- (0 until width)
       y <- (0 until height)
-    } image.setRGB(x, y, fractal(x)(y).getRGB)
+      v = fractal(x)(y)
+      c = new Color(v._1, v._2, v._3)
+    } image.setRGB(x, y, c.getRGB())
 
     image
   }

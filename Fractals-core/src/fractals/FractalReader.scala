@@ -1,7 +1,8 @@
 package fractals
 
-import java.io.ObjectInputStream
 import java.io.InputStream
+import java.io.ObjectInputStream
+
 import com.google.api.client.http.GenericUrl
 
 class FractalReader {

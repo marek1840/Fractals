@@ -16,12 +16,13 @@ class DrawingArea extends JPanel {
   def setBackgroundColor(c: Color) = backgroundColor = c
 
   def draw: Unit = {
-    val image = getImage(FractalColoring.color(backgroundColor, fractal))
+    val (r, g, b) = (backgroundColor.getRed(), backgroundColor.getGreen(), backgroundColor.getBlue())
+    val image = getImage(FractalColoring.color(r, g, b, fractal))
 
     pic.setIcon(new ImageIcon(image))
   }
 
-  def getImage(fractal: Array[Array[Color]]): BufferedImage = {
+  def getImage(fractal: Array[Array[(Int, Int, Int)]]): BufferedImage = {
     val width = fractal.length
     val height = fractal(0).length
     val image = new BufferedImage(fractal.length, fractal(0).length, BufferedImage.TYPE_INT_RGB)
@@ -29,7 +30,8 @@ class DrawingArea extends JPanel {
     for {
       x <- (0 until width)
       y <- (0 until height)
-    } image.setRGB(x, y, fractal(x)(y).getRGB)
+      v = fractal(x)(y)
+    } image.setRGB(x, y, v._1 * 65536 + v._2 * 256 + v._1)
 
     image
   }

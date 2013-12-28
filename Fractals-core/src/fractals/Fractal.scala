@@ -1,9 +1,6 @@
 package fractals
 
-import java.awt.Color
 import java.io.Serializable
-import scala.collection.mutable.Map
-import scala.collection.mutable.Set
 
 class Fractal(
     val size: (Int, Int),
